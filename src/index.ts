@@ -1,3 +1,9 @@
+interface Button {
+	item: {price: number}
+	show_free_shipping_icon: () => void
+	hide_free_shipping_icon: () => void
+}
+
 let shopping_cart = []
 let shopping_cart_total = 0
 
@@ -17,4 +23,17 @@ function calc_cart_total() {
 
 function set_cart_total_dom() {
 	console.log(`Total: ${shopping_cart_total}`)
+}
+
+function update_shipping_icons() {
+	const buy_buttons = [] as Button[]
+	for (let i = 0; i < buy_buttons.length; i++) {
+		const button = buy_buttons[i]
+		const item = button.item
+		if (item.price + shopping_cart_total >= 20) {
+			button.show_free_shipping_icon()
+		} else {
+			button.hide_free_shipping_icon()
+		}
+	}
 }
